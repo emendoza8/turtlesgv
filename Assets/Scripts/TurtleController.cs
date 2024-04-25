@@ -6,6 +6,7 @@ public class TurtleAnimControll : MonoBehaviour
 {
     public Animator myAnim;
     public float moveSpeed = 5f;
+    public float rotationSpeed = 90f; // Rotation speed in degrees per second
 
     // Update is called once per frame
     void Update()
@@ -22,23 +23,31 @@ public class TurtleAnimControll : MonoBehaviour
             moveDirection -= transform.forward;
             myAnim.SetBool("Walk", true); // Set the "Walk" parameter in the Animator to true
         }
-        else if (Input.GetKey(KeyCode.A))
+
+        // Rotate the turtle based on input keys
+        float rotationAmount = 0f;
+        if (Input.GetKey(KeyCode.A))
         {
-            moveDirection -= transform.right;
-            myAnim.SetBool("Walk", true); // Set the "Walk" parameter in the Animator to true
+            rotationAmount -= rotationSpeed * Time.deltaTime;
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            moveDirection += transform.right;
-            myAnim.SetBool("Walk", true); // Set the "Walk" parameter in the Animator to true
+            rotationAmount += rotationSpeed * Time.deltaTime;
+        }
+
+        // Rotate the turtle
+        transform.Rotate(Vector3.up, rotationAmount);
+
+        // If there's any movement input, normalize the moveDirection vector
+        if (moveDirection != Vector3.zero)
+        {
+            moveDirection.Normalize();
         }
         else
         {
             // No movement input, stop walking animation
             myAnim.SetBool("Walk", false); // Set the "Walk" parameter in the Animator to false
         }
-
-            moveDirection.Normalize();
 
         // Move the turtle based on the calculated movement direction
         transform.Translate(moveDirection * moveSpeed * Time.deltaTime, Space.World);
