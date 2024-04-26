@@ -16,5 +16,7 @@ This will serve as source control and a place to demo my final project. After a 
 ### Sources
 Base behavior tree script provided by Mr. W and https://github.com/MinaPecheux/UnityTutorials-BehaviourTrees/ 
 
-### Demo
+### Demo Hosted on YouTube
+
+[![Watch the video](https://img.youtube.com/vi/dDZkCWDI_jA/default.jpg)](https://youtu.be/dDZkCWDI_jA)
 
